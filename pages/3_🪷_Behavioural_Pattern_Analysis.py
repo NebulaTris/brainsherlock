@@ -70,7 +70,7 @@ div.stButton > button:active::after {
     transform: translate(0, 5%);
 }
 
-
+[data-testid="stForm"] {border: 0px}
 
 
 [data-testid="stAppViewContainer"] {

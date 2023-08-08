@@ -95,6 +95,11 @@ background: rgba(0,0,0,0);
 [data-testid="stToolbar"] {
 right: 2rem;
 }
+
+div[role=radiogroup] label:first-of-type {
+            visibility: hidden;
+            height: 0px;
+        }
 </style>
 """
 
