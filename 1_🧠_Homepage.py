@@ -1,7 +1,4 @@
 import streamlit as st
-import numpy as np
-import mediapipe as mp
-from keras.models import load_model
 from streamlit_extras.switch_page_button import switch_page
 
 st.set_page_config(

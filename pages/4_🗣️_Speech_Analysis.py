@@ -1,7 +1,4 @@
 import streamlit as st
-import numpy as np
-import mediapipe as mp
-from keras.models import load_model
 
 page_bg_img = """
 <style>
