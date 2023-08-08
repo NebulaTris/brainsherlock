@@ -1,4 +1,4 @@
-# BrainSherlock
+# BrainSherlock 🕵️
 
 Welcome to BrainSherlock, a Streamlit app for analyzing mental health using text analysis, behavioral pattern analysis, and speech analysis. This repository contains all the code and resources needed to run the app and analyze mental health using different techniques.
 
