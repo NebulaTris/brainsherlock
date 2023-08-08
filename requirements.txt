@@ -108,7 +108,6 @@ PyQt5==5.15.7
 PyQtWebEngine==5.15.4
 pytest==7.1.2
 python-json-logger==2.0.7
-1661852041405/work
 python-lsp-jsonrpc==1.0.0
 python-version==0.0.2
 pytz-deprecation-shim==0.1.0.post0
