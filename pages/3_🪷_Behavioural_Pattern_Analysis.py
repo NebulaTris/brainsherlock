@@ -208,7 +208,7 @@ with st.form("my_form"):
         output += 0.2
     
     res6 = st.radio(
-        "**Have you lost interest in many activities you used to enjoy?**",
+        "**7. Have you lost interest in many activities you used to enjoy?**",
         ('Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree') , horizontal=True)
     
     if res6 == 'Strongly Agree':
