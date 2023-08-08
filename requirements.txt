@@ -70,7 +70,7 @@ tensorboard==2.13.0
 tensorboard-data-server==0.7.1
 tensorflow==2.13.0
 tensorflow-estimator==2.13.0
-torch==1.12.1
+torch==1.13.1
 webcolors==1.13
 webencodings==0.5.1
 websocket-client==1.6.1
