@@ -106,5 +106,3 @@ st.write("This is a text analysis tool that can be used to analyze the sentiment
 
 out = st.text_input("Input Your Text Here:")
 st.write(out)
-
-st.subheader("This page is currently under construction . Not all features have been implemented.")
