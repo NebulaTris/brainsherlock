@@ -104,7 +104,7 @@ right: 2rem;
 }
 </style>
 """
-add_logo("https://imgtr.ee/images/2023/08/08/06d39a3fc0a1fc9b3e649a4a29fdbc16.webp")
+add_logo("https://github.com/NebulaTris/brainsherlock/blob/main/16915065502869741.jpg?raw=true")
     
 st.markdown(page_bg_img, unsafe_allow_html=True)
 st.title("BrainSherlock 🕵️")
