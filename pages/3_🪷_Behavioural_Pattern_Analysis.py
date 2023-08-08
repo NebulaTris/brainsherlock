@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+from streamlit_extras.app_logo import add_logo
 
 page_bg_img = """
 <style>
@@ -100,6 +101,8 @@ right: 2rem;
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
 st.title("Behavioural Pattern Analysis 🪷")
+add_logo("https://imgtr.ee/images/2023/08/08/06d39a3fc0a1fc9b3e649a4a29fdbc16.webp")
+
 st.sidebar.success("Behavioural Pattern Analysis has been selected")
 
 st.write("This behaviour pattern gives us a score on the basis of the quiz that is present below.")

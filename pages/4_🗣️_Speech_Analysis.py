@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_extras.app_logo import add_logo
 
 page_bg_img = """
 <style>
@@ -104,6 +105,8 @@ div[role=radiogroup] label:first-of-type {
 """
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
+add_logo("https://imgtr.ee/images/2023/08/08/06d39a3fc0a1fc9b3e649a4a29fdbc16.webp")
+
 st.title("Speech Analysis 🗣️")
 
 st.sidebar.success("Speech Analysis has been selected")
