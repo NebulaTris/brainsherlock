@@ -1,5 +1,5 @@
 
-![header](https://github.com/NebulaTris/brainsherlock/assets/94922914/754a7f8b-5127-40c8-bce4-9e25065e4b98)
+<a href = "https://brainsherlock.streamlit.app/"><img src="https://github.com/NebulaTris/brainsherlock/assets/94922914/754a7f8b-5127-40c8-bce4-9e25065e4b98"></a>
 
 Welcome to BrainSherlock, a Streamlit app for analyzing mental health using text analysis, behavioral pattern analysis, and speech analysis. This repository contains all the code and resources needed to run the app and analyze mental health using different techniques.
 
