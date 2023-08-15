@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 from streamlit_extras.app_logo import add_logo
+from streamlit_extras.let_it_rain import rain
 
 page_bg_img = """
 <style>
@@ -238,19 +239,45 @@ with st.form("my_form"):
         if result <= 1.4:
             st.subheader("You are not depressed.")
             time.sleep(1)
-            st.balloons()
+            rain(
+                emoji="🥰",
+                font_size=67,
+                falling_speed=4,
+                animation_length="4",
+            )
         elif result > 1.5 and result <= 2.8:
             st.subheader("You are mildly depressed.")
             time.sleep(1)
-            st.snow()
+            rain(
+                emoji="🙂",
+                font_size=67,
+                falling_speed=4,
+                animation_length="4",
+            )
         elif result > 2.9 and result <= 4.2:
             st.subheader("You are moderately depressed.")
             time.sleep(1)
-            st.snow()
+            rain(
+                emoji="🙁",
+                font_size=67,
+                falling_speed=4,
+                animation_length="4",
+            )
         elif result > 4.3 and result <= 5.6:
             st.subheader("You are moderately severe depressed.")
             time.sleep(1)
-            st.snow()
+            rain(
+                emoji="😔",
+                font_size=67,
+                falling_speed=4,
+                animation_length="4",
+            )
         else:
             st.subheader("You are severely depressed.")
             st.warning('Please seek immediate help', icon="⚠️")
+            rain(
+                emoji="😰",
+                font_size=67,
+                falling_speed=4,
+                animation_length="4",
+            )
