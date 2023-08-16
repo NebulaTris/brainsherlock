@@ -242,7 +242,7 @@ with st.form("my_form"):
                 emoji="🥰",
                 font_size=67,
                 falling_speed=4,
-                animation_length="3",
+                animation_length="4",
             )
         elif result > 1.5 and result <= 2.8:
             st.subheader("You are mildly depressed.")
