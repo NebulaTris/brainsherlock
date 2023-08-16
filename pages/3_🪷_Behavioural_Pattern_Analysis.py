@@ -241,8 +241,8 @@ with st.form("my_form"):
             rain(
                 emoji="🥰",
                 font_size=67,
-                falling_speed=4,
-                animation_length="4",
+                falling_speed=5,
+                animation_length="infinite",
             )
         elif result > 1.5 and result <= 2.8:
             st.subheader("You are mildly depressed.")
@@ -250,8 +250,8 @@ with st.form("my_form"):
             rain(
                 emoji="🙂",
                 font_size=67,
-                falling_speed=4,
-                animation_length="4",
+                falling_speed=5,
+                animation_length="infinite",
             )
         elif result > 2.9 and result <= 4.2:
             st.subheader("You are moderately depressed.")
@@ -259,8 +259,8 @@ with st.form("my_form"):
             rain(
                 emoji="🙁",
                 font_size=67,
-                falling_speed=4,
-                animation_length="4",
+                falling_speed=5,
+                animation_length="infinite",
             )
         elif result > 4.3 and result <= 5.6:
             st.subheader("You are moderately severe depressed.")
@@ -268,8 +268,8 @@ with st.form("my_form"):
             rain(
                 emoji="😔",
                 font_size=67,
-                falling_speed=4,
-                animation_length="4",
+                falling_speed=5,
+                animation_length="infinite",
             )
         else:
             st.subheader("You are severely depressed.")
@@ -277,6 +277,6 @@ with st.form("my_form"):
             rain(
                 emoji="😰",
                 font_size=67,
-                falling_speed=4,
-                animation_length="4",
+                falling_speed=5,
+                animation_length="infinite",
             )
