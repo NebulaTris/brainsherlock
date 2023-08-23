@@ -11,9 +11,9 @@ page_bg_img = """
 <style>
 
 div.stButton > button:first-child {
-    width: 200px;
+    width: 150px;
     height: 60px;
-    padding: 0.6em 2em;
+    padding: 0.3em 1em;
     border: none;
     outline: none;
     color: rgb(255, 255, 255);
@@ -116,7 +116,7 @@ st.markdown("**So, whether you're pouring out your soul through text messages or
 st.markdown("**Remember, the key to mental well-being is often a mix of humor and genuine understanding. Let's embrace our quirkiness and embark on a whimsical journey to explore our emotions together!** 🌈🎢")
 st.markdown("**Choose your adventure below, and let's get started!** 🚀")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     btn = st.button("Text Analysis")
@@ -127,8 +127,13 @@ with col2:
     btn2 = st.button("Behavioural Pattern Analysis")
     if btn2:
         switch_page("Behavioural Pattern Analysis")
-
+        
 with col3:
-    btn3 = st.button("Speech Analysis")
+    btn3 = st.button("Facial Analysis")
     if btn3:
+        switch_page("Facial Analysis")
+
+with col4:
+    btn4 = st.button("Speech Analysis")
+    if btn4:
         switch_page("Speech Analysis")
