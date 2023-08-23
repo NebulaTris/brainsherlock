@@ -72,7 +72,6 @@ tensorboard-data-server==0.7.1
 tensorflow==2.13.0
 tensorflow-estimator==2.13.0
 tensorflow-hub==0.14.0
-tensorflow-intel==2.13.0
 tensorflow-io-gcs-filesystem==0.31.0
 twilio==8.5.0
 webcolors==1.13
