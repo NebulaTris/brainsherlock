@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_extras.app_logo import add_logo
-from streamlit_webrtc import webrtc_streamer, RTCConfiguration
+from streamlit_webrtc import VideoProcessorBase, webrtc_streamer, WebRtcMode, ClientSettings
 import av
 import webbrowser
 import cv2
@@ -8,6 +8,7 @@ import numpy as np
 import mediapipe as mp
 from keras.models import load_model
 from streamlit_extras.switch_page_button import switch_page
+from sample_utils.turn import get_ice_servers
 
 page_bg_img = """
 <style>
@@ -183,8 +184,8 @@ class EmotionProcessor:
         return av.VideoFrame.from_ndarray(frm, format="bgr24")
     
 if st.session_state["run"] != "false":
-    webrtc_streamer(key="key", desired_playing_state=True , video_processor_factory=EmotionProcessor 
-                    ,rtc_configuration=RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}))
+    webrtc_streamer(key="key", desired_playing_state=True , video_processor_factory=EmotionProcessor, mode=WebRtcMode.SENDRECV,
+        rtc_configuration={"iceServers": get_ice_servers()},media_stream_constraints={"video": True, "audio": False})
 btn = st.button("Check your mental state")
 
 if btn:
@@ -194,5 +195,5 @@ if btn:
     else:
         np.save("emotion.npy",np.array([""]))
         st.session_state["run"] = run
-        st.write(emotion)
+        st.subheader(emotion)
 
