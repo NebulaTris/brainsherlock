@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_extras.app_logo import add_logo
-from streamlit_webrtc import VideoProcessorBase, webrtc_streamer, WebRtcMode, ClientSettings
+from streamlit_webrtc import VideoProcessorBase, webrtc_streamer, WebRtcMode
 import av
 import webbrowser
 import cv2
@@ -184,8 +184,12 @@ class EmotionProcessor:
         return av.VideoFrame.from_ndarray(frm, format="bgr24")
     
 if st.session_state["run"] != "false":
-    webrtc_streamer(key="key", desired_playing_state=True , video_processor_factory=EmotionProcessor, mode=WebRtcMode.SENDRECV,
-        rtc_configuration={"iceServers": get_ice_servers()},media_stream_constraints={"video": True})
+    webrtc_streamer(key="key", desired_playing_state=True , video_processor_factory=EmotionProcessor,mode=WebRtcMode.SENDRECV,
+    rtc_configuration={
+        "iceServers": get_ice_servers(),
+    },
+    media_stream_constraints={"video": True},
+    async_processing=True,)
 btn = st.button("Check your mental state")
 
 if btn:
