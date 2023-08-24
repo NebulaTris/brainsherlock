@@ -185,7 +185,7 @@ class EmotionProcessor:
     
 if st.session_state["run"] != "false":
     webrtc_streamer(key="key", desired_playing_state=True , video_processor_factory=EmotionProcessor, mode=WebRtcMode.SENDRECV,
-        rtc_configuration={"iceServers": get_ice_servers()},media_stream_constraints={"video": True, "audio": False})
+        rtc_configuration={"iceServers": get_ice_servers()},media_stream_constraints={"video": True})
 btn = st.button("Check your mental state")
 
 if btn:
