@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_extras.app_logo import add_logo
 from streamlit_webrtc import webrtc_streamer
 import av
 import webbrowser
@@ -8,6 +7,7 @@ import numpy as np
 import mediapipe as mp
 from keras.models import load_model
 from streamlit_extras.switch_page_button import switch_page
+from streamlit_extras.app_logo import add_logo
 
 page_bg_img = """
 <style>
@@ -193,5 +193,5 @@ if btn:
     else:
         np.save("emotion.npy",np.array([""]))
         st.session_state["run"] = run
-        st.write(emotion)
+        st.subheader(emotion)
 
