@@ -122,7 +122,7 @@ questions = [
 
 answers = []
 for i, question in enumerate(questions):
-    st.markdown(f"*Question {i+1}:* {question}")
+    st.markdown(f"Question {i+1}: {question}")
     answer = st.text_input(f"Answer {i+1}:", key=f"answer_{i}")
     answers.append(answer)
 
@@ -130,7 +130,12 @@ for i, question in enumerate(questions):
 st.write("Your answers:")
 for i, answer in enumerate(answers):
     st.write(f"Answer {i+1}: {answer}")
+    
+# Add the "Submit" button
+submit_button = st.button("Submit", key="submit_button")
 
+if submit_button:
+    st.write("Analyzing...")
 
 
 # Load the dataset CSV file
@@ -150,7 +155,7 @@ def preprocess(file):
     data['hos'] = hos
     return data
 
-train_data = preprocess(r"Dataset(Text).csv")
+train_data = preprocess(r"C:\Users\jigya\Downloads\Mental Health Assessment\Dataset(Text).csv")
 print(train_data.head())
 train = train_data.copy()
 
@@ -166,7 +171,7 @@ model.compile(optimizer='adam',
               loss=tf.losses.BinaryCrossentropy(from_logits=True),
               metrics=[tf.metrics.BinaryAccuracy(threshold=0.0, name='accuracy')])
 
-val_data = preprocess(r"dataset.csv")
+val_data = preprocess(r"C:\Users\jigya\Downloads\dataset.csv")
 val = val_data.copy()
 history = model.fit(train_data['text'],  # Use the 'text' column for training data
                     train_data['hos'],
@@ -188,28 +193,21 @@ def encode_texts(texts, max_length):
     encoded = tokenizer(texts, padding='max_length', truncation=True, max_length=max_length, return_tensors='tf')
     return encoded
 
-answers = []
-answers.append(input('How would you describe your experience at your workplace/college/school in the past few days?'))
-answers.append(input('How do you like to spend your leisure time? How do you feel after it?'))
-answers.append(input('Life has its ups and downs. Although handling successes can be difficult, setbacks can affect mental health strongly. How do you manage your emotions after failures?'))
-answers.append(input('Are there any improvements/decline in your salary/grades?'))
-answers.append(input('Any recent unpleasant experience that you would like to share?'))
-answers.append(input('In a broad sense, how would you describe the way your life is going on?'))
-
 results = model.predict(np.array(answers))
 score = postprocessor(results)
+
 print('Your mental health score is:', score)
 def categorize_mental_health(score):
     if score <= 20:
-        return "Not Depressed"
+        return "Severely Depressed"
     elif score <= 30:
-        return "Mildly Depressed"
+        return "Moderately severely Depressed"
     elif score <= 40:
         return "Moderately Depressed"
     elif score <= 50:
-        return "Moderately severely Depressed"
+        return "Mildly Depressed"
     else:
-        return "Severely Depressed"
+        return "Not Depressed"
 
 mental_health_category = categorize_mental_health(score)
 st.write(f"Your mental health score is: {score}")
