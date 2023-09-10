@@ -1,13 +1,21 @@
+from pathlib import Path
+#Imports for streamlit
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer
 import av
-import webbrowser
 import cv2
+from streamlit_webrtc import (
+    RTCConfiguration,
+    VideoProcessorBase,
+    WebRtcMode,
+    webrtc_streamer,
+)
+from streamlit_extras.switch_page_button import switch_page
+from streamlit_extras.app_logo import add_logo
+
+#Imports for ml model
 import numpy as np
 import mediapipe as mp
 from keras.models import load_model
-from streamlit_extras.switch_page_button import switch_page
-from streamlit_extras.app_logo import add_logo
 
 page_bg_img = """
 <style>
@@ -119,6 +127,14 @@ st.title("Facial Analysis 👤")
 
 st.sidebar.success("Facial Analysis has been selected")
 
+RTC_CONFIGURATION = RTCConfiguration(
+    {"iceServers": [{
+        "urls": ["stun:stun.l.google.com:19302"]
+    }]})
+
+# CWD path
+HERE = Path(__file__).parent
+
 model = load_model("model.h5")
 label = np.load("label.npy")
 
@@ -138,8 +154,8 @@ except:
     emotion = ""
 
     
-class EmotionProcessor:
-    def recv(self,frame):
+class EmotionProcessor(VideoProcessorBase):
+    def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
         frm = frame.to_ndarray(format="bgr24")
         frm = cv2.flip(frm, 1)  
         res = holis.process(cv2.cvtColor(frm, cv2.COLOR_BGR2RGB))
@@ -183,7 +199,11 @@ class EmotionProcessor:
         return av.VideoFrame.from_ndarray(frm, format="bgr24")
     
 if st.session_state["run"] != "false":
-    webrtc_streamer(key="key", desired_playing_state=True , video_processor_factory=EmotionProcessor)
+    webrtc_streamer(key="key", desired_playing_state=True ,mode=WebRtcMode.SENDRECV,  rtc_configuration=RTC_CONFIGURATION, video_processor_factory=EmotionProcessor, media_stream_constraints={
+            "video": True,
+            "audio": False
+        },
+        async_processing=True)
 btn = st.button("Check your mental state")
 
 if btn:
