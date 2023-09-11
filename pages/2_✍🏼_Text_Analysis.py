@@ -154,6 +154,9 @@ def preprocess(file):
     data['emotion'] = emotion  # Add 'emotion' column
     data['hos'] = hos
     return data
+    except FileNotFoundError:
+    st.error("File not found. Please provide the correct file path.")
+    return None
 
 train_data = preprocess(r"https://github.com/Jixiee/brainsherlock-jixiee/blob/main/Dataset(Text).csv")
 print(train_data.head())
