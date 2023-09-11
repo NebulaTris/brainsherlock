@@ -155,7 +155,7 @@ def preprocess(file):
     data['hos'] = hos
     return data
 
-train_data = preprocess(r"C:\Users\jigya\Downloads\Mental Health Assessment\Dataset(Text).csv")
+train_data = preprocess(r"https://github.com/Jixiee/brainsherlock-jixiee/blob/main/Dataset(Text).csv")
 print(train_data.head())
 train = train_data.copy()
 
