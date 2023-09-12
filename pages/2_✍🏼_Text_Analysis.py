@@ -162,7 +162,7 @@ def preprocess(file):
     else:
         return None
 
-train_data = preprocess(r"/dataset.csv")
+train_data = preprocess(r"dataset.csv")
 print(train_data.head())
 train = train_data.copy()
 
@@ -178,7 +178,7 @@ model.compile(optimizer='adam',
               loss=tf.losses.BinaryCrossentropy(from_logits=True),
               metrics=[tf.metrics.BinaryAccuracy(threshold=0.0, name='accuracy')])
 
-val_data = preprocess(r"/dataset.csv")
+val_data = preprocess(r"dataset.csv")
 val = val_data.copy()
 history = model.fit(train_data['text'],  # Use the 'text' column for training data
                     train_data['hos'],
