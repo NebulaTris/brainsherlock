@@ -154,9 +154,13 @@ def preprocess(file):
     data['emotion'] = emotion  # Add 'emotion' column
     data['hos'] = hos
     return data
+    try:
+        data = pd.read_csv(file, delimiter=';', header=None, names=['text;emotion'])
     except FileNotFoundError:
-    st.error("File not found. Please provide the correct file path.")
-    return None
+        st.error("File not found. Please provide the correct file path.")
+        return None
+    else:
+        return None
 
 train_data = preprocess(r"/dataset.csv")
 print(train_data.head())
@@ -174,7 +178,7 @@ model.compile(optimizer='adam',
               loss=tf.losses.BinaryCrossentropy(from_logits=True),
               metrics=[tf.metrics.BinaryAccuracy(threshold=0.0, name='accuracy')])
 
-val_data = preprocess(r"https://github.com/Jixiee/brainsherlock-jixiee/blob/main/dataset.csv")
+val_data = preprocess(r"/dataset.csv")
 val = val_data.copy()
 history = model.fit(train_data['text'],  # Use the 'text' column for training data
                     train_data['hos'],
