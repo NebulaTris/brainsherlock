@@ -158,7 +158,7 @@ def preprocess(file):
     st.error("File not found. Please provide the correct file path.")
     return None
 
-train_data = preprocess(r"https://github.com/Jixiee/brainsherlock-jixiee/blob/main/Dataset(Text).csv")
+train_data = preprocess(r"/dataset.csv")
 print(train_data.head())
 train = train_data.copy()
 
