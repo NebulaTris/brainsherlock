@@ -154,13 +154,6 @@ def preprocess(file):
     data['emotion'] = emotion  # Add 'emotion' column
     data['hos'] = hos
     return data
-    try:
-        data = pd.read_csv(file, delimiter=';', header=None, names=['text;emotion'])
-    except FileNotFoundError:
-        st.error("File not found. Please provide the correct file path.")
-        return None
-    else:
-        return None
 
 train_data = preprocess(r"Dataset(Text).csv")
 print(train_data.head())
@@ -182,7 +175,7 @@ val_data = preprocess(r"dataset.csv")
 val = val_data.copy()
 history = model.fit(train_data['text'],  # Use the 'text' column for training data
                     train_data['hos'],
-                    epochs=40,
+                    epochs=60,
                     batch_size=512,
                     verbose=0)
 # Use the model to make predictions
@@ -205,14 +198,14 @@ score = postprocessor(results)
 
 print('Your mental health score is:', score)
 def categorize_mental_health(score):
-    if score <= 20:
-        return "Severely Depressed"
-    elif score <= 30:
-        return "Moderately severely Depressed"
-    elif score <= 40:
-        return "Moderately Depressed"
+    if score <= 40:
+        return "Severely Depressed. \nWe're sorry to hear that you're feeling this way. \nPlease remember that there are people who care about you.Take a break and enjoy some relaxing music to uplift your mood. \nHere's a link to a playlist: [Playlist](https://youtu.be/6T9NnhHuABQ?si=NsRUywX30UQ-7tZM)"
+    elif score <= 45:
+        return "Moderately severely Depressed. \nTry enjoying the journey of life till it lasts."
     elif score <= 50:
-        return "Mildly Depressed"
+        return "Moderately Depressed. \nSit back, relax and have fun because YOLO :)"
+    elif score <= 60:
+        return "Mildly Depressed. \nYou don't have to be stressed at every little discomfort you encounter. Chin Up!"
     else:
         return "Not Depressed"
 

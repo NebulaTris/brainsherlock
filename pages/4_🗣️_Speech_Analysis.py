@@ -3,6 +3,7 @@ from streamlit_extras.app_logo import add_logo
 import speech_recognition as sr
 import tensorflow as tf
 import tensorflow_hub as hub 
+import pandas as pd
 import numpy as np
 from transformers import BertTokenizer
 
@@ -118,8 +119,26 @@ st.sidebar.success("Speech Analysis has been selected")
 
 st.write(" Speech Analysis will be done with the use of machine learning python libraries and the use of the webcam. The model will be trained to detect the emotions of the user.")
 
+def preprocess(file):
+    data = pd.read_csv(file, delimiter=';', header=None, names=['text;emotion'])
+    hos = []
+    for i in range(len(data)):
+        text_emotion = data['text;emotion'][i].split(';')
+        text = ';'.join(text_emotion[:-1])  # Combine text parts separated by semicolons
+        emotion = text_emotion[-1]  # Extract emotion
+        if emotion in ['joy', 'love', 'surprise']:
+            hos.append(1)  # happy is 1
+        else:
+            hos.append(0)  # sad is 0
+    data['text'] = text  # Add 'text' column
+    data['emotion'] = emotion  # Add 'emotion' column
+    data['hos'] = hos
+    return data
 
-# Load and compile your mental health prediction model here
+train_data = preprocess(r"Dataset(Text).csv")
+print(train_data.head())
+train = train_data.copy()
+
 model = tf.keras.Sequential([
     hub.KerasLayer("https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1",
                    output_shape=[20], input_shape=[], dtype=tf.string,
@@ -131,13 +150,21 @@ model = tf.keras.Sequential([
 model.compile(optimizer='adam',
               loss=tf.losses.BinaryCrossentropy(from_logits=True),
               metrics=[tf.metrics.BinaryAccuracy(threshold=0.0, name='accuracy')])
+
+val_data = preprocess(r"dataset.csv")
+val = val_data.copy()
+history = model.fit(train_data['text'],  # Use the 'text' column for training data
+                    train_data['hos'],
+                    epochs=90,
+                    batch_size=512,
+                    verbose=0)
+
 def postprocessor(preds):
     preds_range = preds.max() - preds.min()
     probab = []
     for i in preds:
         probab.append((i - preds.min()) * 100 / preds_range)
     return np.mean(probab)
-from transformers import BertTokenizer
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
@@ -152,13 +179,13 @@ def calculate_mental_health_score(text):
     st.write("Your mental health score is:", score)
     return score
 def categorize_mental_health(score):
-    if score <= 20:
-        return "Severely Depressed"
-    elif score <= 30:
+    if score <= 40:
+        return "Severely Depressed. \n We're sorry to hear that you're feeling this way. Please remember that there are people who care about you.Take a break and enjoy some relaxing music to uplift your mood. Here's a link to a playlist: [Playlist](https://youtu.be/6T9NnhHuABQ?si=NsRUywX30UQ-7tZM)"
+    elif score <= 45:
         return "Moderately severely Depressed"
-    elif score <= 40:
-        return "Moderately Depressed"
     elif score <= 50:
+        return "Moderately Depressed"
+    elif score <= 60:
         return "Mildly Depressed"
     else:
         return "Not Depressed"
@@ -169,6 +196,7 @@ def main():
 
     with sr.Microphone() as source:
         st.write("Please click the button below, allow microphone access, and describe how you are feeling:")
+        st.write("Please use Microphone")
         record_button = st.button("Record")
 
         if record_button:
@@ -189,6 +217,8 @@ def main():
                 st.write("Could not understand audio")
             except sr.RequestError as e:
                 st.write("Could not process audio:", e)
+            except Exception as e:
+                st.write("Error:", str(e))
 
 if __name__ == "__main__":
     main()
