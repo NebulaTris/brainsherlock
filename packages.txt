@@ -2,3 +2,7 @@ libgl1
 ffmpeg
 libsm6
 libxext6
+build-essential
+libasound-dev
+portaudio19-dev
+python3-pyaudio
